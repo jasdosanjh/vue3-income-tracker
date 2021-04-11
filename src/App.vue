@@ -1,10 +1,26 @@
 <template>
-  <h1>Hello, World</h1>
+  <Header :totalIncome="state.totalIncome" />
 </template>
 
 <script>
+import Header from '@/components/Header';
+import { reactive, computed } from 'vue';
+
 export default {
-  name: 'App',
+  components: {
+    Header
+  },
+
+  setup() {
+    const state = reactive({
+      income: [],
+      totalIncome: computed(() => state.income.reduce((total, { value }) => total + value, 0))
+    })
+
+    return {
+     state
+    }
+  }
 }
 </script>
 
